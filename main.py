@@ -18,8 +18,9 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Set a secure secret key
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable track modifications to avoid warnings
-app.config['GOOGLE_OAUTH_CLIENT_ID'] = '850006353973-d4jiihh3dj02ncm45f0gmg61dmj59djn.apps.googleusercontent.com'  # Ensure to use your actual client ID
-app.config['GOOGLE_OAUTH_CLIENT_SECRET'] = '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'  # Ensure to use your actual client secret
+app.config['GOOGLE_OAUTH_CLIENT_ID'] = ${{ secrets.GOOGLE_CLIENT_ID }}
+
+app.config['GOOGLE_OAUTH_CLIENT_SECRET'] = ${{ secrets.GOOGLE_CLIENT_SECRET }} 
 db.init_app(app)
 
 # Initialize Google blueprint
