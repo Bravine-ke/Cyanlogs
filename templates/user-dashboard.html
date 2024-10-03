@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>User Dashboard</title>
+</head>
+<body class="bg-gradient-to-r from-green-400 to-blue-500 min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="bg-gray-800 text-white p-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold">User Dashboard</h1>
+        <a href="/logout" class="bg-red-500 px-4 py-2 rounded hover:bg-red-600 transition">Logout</a>
+    </nav>
+
+    <!-- Welcome Section -->
+    <section class="flex-1 flex justify-center items-center p-6">
+        <div class="bg-white shadow-lg rounded-lg p-8 max-w-lg text-center">
+            <h2 class="text-3xl font-bold text-gray-800">Welcome, {{ username }}!</h2>
+            <p class="mt-4 text-gray-600">This is your personalized dashboard. You can view and manage your account here.</p>
+            <div class="mt-6 space-x-4">
+                <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition">View Profile</button>
+                <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition">Account Settings</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Statistics Section -->
+    <section class="container mx-auto p-6">
+        <h2 class="text-2xl font-bold text-gray-800 text-center mb-4">Your Statistics</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Statistic Card 1 -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold">Total Activities</h3>
+                <p class="text-4xl text-blue-600">25</p>
+            </div>
+            <!-- Statistic Card 2 -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold">Completed Tasks</h3>
+                <p class="text-4xl text-green-600">15</p>
+            </div>
+            <!-- Statistic Card 3 -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold">Pending Tasks</h3>
+                <p class="text-4xl text-red-600">5</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Actions Section -->
+    <section class="container mx-auto p-6">
+        <h2 class="text-2xl font-bold text-gray-800 text-center mb-4">Quick Actions</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Action Card 1 -->
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                <h3 class="text-xl font-semibold">Manage Users</h3>
+                <p>Access user profiles and manage their details.</p>
+                <a href="/manage-users" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Manage</a>
+            </div>
+            <!-- Action Card 2 -->
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                <h3 class="text-xl font-semibold">View Reports</h3>
+                <p>Generate and view reports for your activities.</p>
+                <a href="/reports" class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition">View Reports</a>
+            </div>
+            <!-- Action Card 3 -->
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                <h3 class="text-xl font-semibold">Settings</h3>
+                <p>Adjust your account settings and preferences.</p>
+                <a href="/settings" class="mt-4 bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 transition">Edit Settings</a>
+            </div>
+            <!-- Action Card 4 -->
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                <h3 class="text-xl font-semibold">Help & Support</h3>
+                <p>Contact support for any assistance you may need.</p>
+                <a href="/support" class="mt-4 bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-700 transition">Get Help</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section class="container mx-auto p-6">
+        <h2 class="text-2xl font-bold text-gray-800 text-center mb-4">Your Feedback</h2>
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-semibold mb-2">We value your opinion!</h3>
+            <p class="mb-4">Please share your thoughts and suggestions about our services.</p>
+            <textarea class="w-full p-2 border border-gray-300 rounded mb-4" rows="4" placeholder="Type your feedback here..."></textarea>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Submit Feedback</button>
+        </div>
+    </section>
+
+    <!-- Recent Activities Section -->
+    <section class="container mx-auto p-6">
+        <h2 class="text-2xl font-bold text-gray-800 text-center mb-4">Recent Activities</h2>
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <ul class="list-disc pl-5">
+                <li class="mb-2">Completed the task "Design the user interface."</li>
+                <li class="mb-2">Updated profile information.</li>
+                <li class="mb-2">Joined the project "Website Redesign."</li>
+                <li class="mb-2">Submitted feedback on the new features.</li>
+                <li class="mb-2">Logged in from a new device.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Additional Links Section -->
+    <section class="container mx-auto p-6">
+        <h2 class="text-2xl font-bold text-gray-800 text-center mb-4">Additional Links</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                <h3 class="text-xl font-semibold">Privacy Policy</h3>
+                <a href="/privacy" class="mt-4 text-blue-500 hover:underline">Read more</a>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                <h3 class="text-xl font-semibold">Terms of Service</h3>
+                <a href="/terms" class="mt-4 text-blue-500 hover:underline">Read more</a>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                <h3 class="text-xl font-semibold">Contact Us</h3>
+                <a href="/contact" class="mt-4 text-blue-500 hover:underline">Get in touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white text-center p-4">
+        &copy; 2024 User Dashboard. All rights reserved.
+    </footer>
+
+</body>
+</html>

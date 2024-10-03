@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>My Details</title>
+</head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-semibold text-center text-gray-800 mb-6">My Details</h1>
+
+        <form method="POST" class="bg-white shadow-md rounded-lg p-6 mb-6">
+            <div class="mb-4">
+                <label for="username" class="block text-gray-700">Username:</label>
+                {% for user in users %}
+                <input type="text" name="username" value="{{ user.username }}" required
+                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 transition duration-200">
+                {% endfor %}
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="block text-gray-700">Password:</label>
+                {% for user in users %}
+                <input type="password" name="password" value="{{ user.password }}" required
+                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 transition duration-200">
+                {% endfor %}
+            </div>
+
+            <div class="flex justify-between">
+                <button type="submit" name="update"
+                    class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition duration-200">Update Details</button>
+                <button type="submit" name="delete"
+                    onclick="return confirm('Are you sure you want to delete your account?')"
+                    class="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 transition duration-200">Delete
+                    Account</button>
+            </div>
+        </form>
+
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">User Details</h2>
+            <table class="min-w-full bg-white">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="py-2 px-4 text-left text-gray-600">Username</th>
+                        <th class="py-2 px-4 text-left text-gray-600">Password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr class="hover:bg-gray-100 transition duration-200">
+                        <td class="py-2 px-4 border-b border-gray-300">{{ user.username }}</td>
+                        <td class="py-2 px-4 border-b border-gray-300">{{ user.password }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ url_for('admin_dashboard') }}"
+                class="mt-4 inline-block bg-gray-700 text-white p-2 rounded-md hover:bg-gray-800 transition duration-200">Back to
+                Admin Dashboard</a>
+        </div>
+
+        <div class="text-center mt-6">
+            <a href="{{ url_for('logout') }}"
+                class="text-blue-500 hover:underline transition duration-200">Logout</a>
+        </div>
+    </div>
+</body>
+
+</html>

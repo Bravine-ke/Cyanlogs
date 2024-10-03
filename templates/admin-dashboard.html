@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Admin Dashboard</title>
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 flex justify-between items-center">
+        <h1 class="text-3xl font-bold">Admin Dashboard</h1>
+        <a href="/logout" class="bg-red-500 px-4 py-2 rounded hover:bg-red-600 transition">Logout</a>
+    </nav>
+
+    <!-- Admin Controls Section -->
+    <div class="container mx-auto p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- User Management Card -->
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                <h2 class="text-2xl font-bold mb-4">User Management</h2>
+                <p>Manage user permissions, add new users, and control access levels.</p>
+                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Manage Users</button>
+            </div>
+
+            <!-- Content Settings Card -->
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                <h2 class="text-2xl font-bold mb-4">Content Settings</h2>
+                <p>Update the content displayed on the website including images, text, and layout.</p>
+                <button class="mt-4 bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-700 transition">Edit Content</button>
+            </div>
+
+            <!-- Analytics Card -->
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                <h2 class="text-2xl font-bold mb-4">Analytics</h2>
+                <p>View and analyze website traffic, performance metrics, and user behavior.</p>
+                <button class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition">View Analytics</button>
+            </div>
+
+           <!-- User Details Card -->
+<div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+    <h2 class="text-2xl font-bold mb-4">User Details</h2>
+    <p class="mb-4">Access detailed information on users and manage their profiles.</p>
+    <a href="{{ url_for('user_details') }}" class="mt-4 bg-teal-500 text-white px-4 py-2 rounded hover:bg-teal-700 transition">View User Details</a>
+</div>
+
+
+<!-- System Settings Card -->
+<div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+    <h2 class="text-2xl font-bold mb-4">System Settings</h2>
+    <p class="mb-4">Configure system preferences and manage application settings.</p>
+    <button class="mt-2 bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 transition">Edit Settings</button>
+</div>
+
+            <!-- Notification Management Card -->
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                <h2 class="text-2xl font-bold mb-4">Notification Management</h2>
+                <p>Send alerts and manage notifications for users and admins.</p>
+                <button class="mt-4 bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Manage Notifications</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center p-4 mt-8 bg-gray-900 text-white">
+        &copy; 2024 Admin Dashboard. All rights reserved.
+    </footer>
+
+</body>
+
+</html>
