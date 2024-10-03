@@ -13,6 +13,8 @@ from auth import (
 )
 from forms import RegistrationForm  # Adjust this import based on your forms.py setup
 from models import User, db  # Adjust this import based on your models.py setup
+import os
+
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Set a secure secret key
