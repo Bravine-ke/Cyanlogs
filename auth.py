@@ -2,6 +2,7 @@
 from flask import session, flash, redirect, url_for
 from functools import wraps
 from flask_dance.contrib.google import google
+from models import User, db
 
 # Mock user database for demonstration
 users = []
