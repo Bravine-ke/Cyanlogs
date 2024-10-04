@@ -17,13 +17,19 @@ import os
 
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Set a secure secret key
+app.secret_key = os.getenv('SECRET_KEY') 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable track modifications to avoid warnings
+
 # Access Google OAuth credentials from environment variables
 app.config['GOOGLE_OAUTH_CLIENT_ID'] = os.getenv('GOOGLE_CLIENT_ID')
-app.config['GOOGLE_OAUTH_CLIENT_SECRET'] = os.getenv('GOOGLE_CLIENT_SECRET') 
+app.config['GOOGLE_OAUTH_CLIENT_SECRET'] = os.getenv('GOOGLE_CLIENT_SECRET')
+
 db.init_app(app)
+
+# Verify if the necessary environment variables are present
+if not app.config['GOOGLE_OAUTH_CLIENT_ID'] or not app.config['GOOGLE_OAUTH_CLIENT_SECRET']:
+    raise ValueError("Missing Google OAuth credentials. Ensure the environment variables are set correctly.")
 
 # Initialize Google blueprint
 google_bp = make_google_blueprint(scope="https://www.googleapis.com/auth/userinfo.email")
