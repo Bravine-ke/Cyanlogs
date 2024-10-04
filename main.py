@@ -25,6 +25,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable track modificati
 app.config['GOOGLE_OAUTH_CLIENT_ID'] = os.getenv('GOOGLE_CLIENT_ID')
 app.config['GOOGLE_OAUTH_CLIENT_SECRET'] = os.getenv('GOOGLE_CLIENT_SECRET')
 
+REDIRECT_URI = 'https://patapesa.live/google/google/authorized'
+
 db.init_app(app)
 
 # Verify if the necessary environment variables are present
@@ -75,10 +77,46 @@ def login_admin():
             return redirect(url_for('login_admin'))
     return render_template('admin-login.html')
 
+@app.route('/google/google/authorized')
+def authorized():
+    # Check if the code is returned
+    code = request.args.get('code')
+    if not code:
+        return 'Authorization failed.'
+
+    # Exchange code for access token
+    token_url = 'https://oauth2.googleapis.com/token'
+    token_data = {
+        'code': code,
+        'client_id': CLIENT_ID,
+        'client_secret': CLIENT_SECRET,
+        'redirect_uri': REDIRECT_URI,
+        'grant_type': 'authorization_code'
+    }
+    token_response = requests.post(token_url, data=token_data)
+    token_json = token_response.json()
+
+    if 'error' in token_json:
+        return 'Error fetching token.'
+
+    # Use access token to get user info
+    access_token = token_json['access_token']
+    userinfo_url = 'https://www.googleapis.com/oauth2/v1/userinfo'
+    userinfo_params = {'access_token': access_token}
+    userinfo_response = requests.get(userinfo_url, params=userinfo_params)
+    userinfo = userinfo_response.json()
+
+    # Store user info in session and redirect to dashboard
+    session['user'] = userinfo
+    return redirect(url_for('user_dashboard'))
+
+
 # User dashboard
 @app.route('/dashboard')
 @login_required
 def user_dashboard():
+    if 'user' not in session:
+        return redirect(url_for('login'))
     return render_template('user-dashboard.html', username=session['username'])
 
 # Admin dashboard
