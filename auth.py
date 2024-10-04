@@ -37,29 +37,44 @@ def google_login():
         return redirect(url_for('google.login'))
 
 def google_authorized():
+    # Check if the user is authorized by Google
     if not google.authorized:
-        return "Authorization failed", 403
+        flash("Google authorization failed. Please try again.")
+        return redirect(url_for('login_user'))  # Ensure 'login_user' route is defined
+    
+    # Get user info from Google
+    try:
+        resp = google.get('/userinfo')
+        if not resp.ok:
+            logging.error(f"Failed to fetch user info: {resp.text}")
+            flash("Failed to retrieve user information from Google.")
+            return redirect(url_for('login_user'))
+        
+        user_info = resp.json()
+        username = user_info.get('name')
+        email = user_info.get('email')
+        
+        if not username or not email:
+            flash("Google user info is incomplete. Please ensure your Google account is properly configured.")
+            return redirect(url_for('login_user'))
+        
+        # Register user if not already registered
+        if not any(user['username'] == username for user in users):
+            register_user(username, email)
+            flash('Registration successful using Google!')
+        
+        # Store user information in session
+        session['logged_in'] = True
+        session['username'] = username
+        flash(f"Welcome {username}! You are now logged in with Google.")
+    
+    except Exception as e:
+        logging.error(f"Error during Google authorization: {e}")
+        flash("An error occurred during Google login. Please try again.")
+        return redirect(url_for('login_user'))
 
-    resp = google.get('/userinfo')
-    if not resp.ok:
-        return f"Failed to fetch user info: {resp.text}", 500
-
-    user_info = resp.json()
-    username = user_info['name']
-    email = user_info['email']
-
-    # Register the user if not already in the users list
-    if not any(user['username'] == username for user in users):
-        register_user(username, email)  # Automatically register if not found
-        flash('Registration successful using Google!')
-
-    session['logged_in'] = True
-    session['username'] = username
-    flash(f'Welcome {username}! You are logged in with Google.')
-
+    # Redirect to user dashboard after successful login
     return redirect(url_for('user_dashboard'))
-
-
 def logout_user():
     session.pop('logged_in', None)
     session.pop('admin_logged_in', None)
